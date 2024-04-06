@@ -7,10 +7,14 @@ import 'config.dart';
 import 'package:logger/logger.dart';
 
 void main() {
-  Logger.level = Level.debug;
-  runApp(const AppConfig(
-    apiUrl: 'http://127.0.0.1:8000',
-    child: MyApp(),
+  // var apiUrl = 'http://127.0.0.1:8000';
+  // var logLevel = Level.debug;
+  var apiUrl = 'http://138.197.63.156:8000';
+  var logLevel = Level.info;
+  Logger.level = logLevel;
+  runApp(AppConfig(
+    apiUrl: apiUrl,
+    child: const MyApp(),
   ));
 }
 

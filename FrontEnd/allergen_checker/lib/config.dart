@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 class AppConfig extends InheritedWidget {
   final String apiUrl;
 
-  const AppConfig({
+  const AppConfig({super.key, 
     required this.apiUrl,
-    required Widget child,
-  }) : super(child: child);
+    required super.child,
+  });
 
   static AppConfig of(BuildContext context) {
     return context.dependOnInheritedWidgetOfExactType<AppConfig>()!;
