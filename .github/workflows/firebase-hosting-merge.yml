@@ -17,3 +17,4 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_ALLERGENCHECKER_A1788 }}'
           channelId: live
           projectId: allergenchecker-a1788
+          entryPoint: FrontEnd/allergen_checker
