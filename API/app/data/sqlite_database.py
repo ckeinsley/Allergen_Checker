@@ -87,7 +87,22 @@ class SqlLiteDatabase(Database):
     
     def delete_allergens(self, allergens: List[Allergen]):
         '''If common name, delete everything, else only remove scientific, but if last scientific is deleted, delete everything'''
-        raise NotImplementedError
+        session = self.connect_to_db()
+        for allergen in allergens:
+            common_model = self.check_common_exists(session, allergen.common_name)
+            if not common_model:
+                print('Attempted to delete something that doesnt exist')
+                break
+            for scientific_name in allergen.scientific_names:
+                scientific_model = session.query(ScientificAllergen).filter(ScientificAllergen.name==scientific_name.lower(), ScientificAllergen.common_allergen==common_model).first()
+                if scientific_model:
+                    session.delete(scientific_model)
+            if not common_model.scientific_allergens:
+                session.delete(common_model)
+
+        session.commit()
+        session.close()
+                
     
     def connect_to_db(self):
         Session = sessionmaker(bind=engine)

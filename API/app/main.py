@@ -90,7 +90,12 @@ def delete_allergens(allergenAddRequest: AllergenAddRequest):
     '''
     Delete Allergens from the Database
     '''
-    return JSONResponse(MessageResponse(message="Still in progress").model_dump(), 501)
+    try:
+        db.delete_allergens(allergenAddRequest.allergens)
+        return JSONResponse(MessageResponse(message="Successful").model_dump(), 202)
+    except Exception as e:
+        print(e)
+        return JSONResponse(MessageResponse(message=f"Something went wrong").model_dump(), 500)
 
 @app.get('/database', response_model=AllergenResponse, tags=['Database'])
 def get_allergens(skip: int = 0, limit: int = 10):
