@@ -13,10 +13,10 @@ jobs:
       - uses: actions/checkout@v4
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          env:
-            FIREBASE_CLI_EXPERIMENTS: webframeworks
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_ALLERGENCHECKER_A1788 }}'
           channelId: live
           projectId: allergenchecker-a1788
           entryPoint: FrontEnd/allergen_checker
+        env:
+          FIREBASE_CLI_EXPERIMENTS: webframeworks
