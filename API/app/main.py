@@ -15,11 +15,7 @@ db: Database = SqlLiteDatabase()
 
 # CORS for setting it up alongside the Flutter UI
 origins = [
-    "http://localhost:65165",
-    "127.0.0.1:57534",
-    "127.0.0.1:57561",
-    "https://bnuuyschecker.com",
-    "*"
+    "https://bnuuyschecker.com"
 ]
 
 app.add_middleware(
