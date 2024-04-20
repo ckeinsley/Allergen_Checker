@@ -39,4 +39,4 @@ jobs:
           
       - name: Start Backend Server
         run: |
-          ssh ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_URL }} "./App/run.sh"
+          ssh ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_URL }} "chmod +x ./App/run.sh && ./App/rush.sh"
