@@ -18,7 +18,7 @@ origins = [
     "http://localhost:65165",
     "127.0.0.1:57534",
     "127.0.0.1:57561",
-    "127.0.0.1:443"
+    "https://bnuuyschecker.com",
     "*"
 ]
 
