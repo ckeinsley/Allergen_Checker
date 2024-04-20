@@ -1,6 +1,6 @@
 from typing import List
 
-from fastapi import FastAPI, responses
+from fastapi import FastAPI, APIRouter
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import RedirectResponse, JSONResponse
 
@@ -11,6 +11,8 @@ from app.data.sqlite_database import SqlLiteDatabase
 from pydantic import BaseModel, Field
 
 app = FastAPI()
+router = APIRouter(prefix="/db")
+app.include_router(router)
 db: Database = SqlLiteDatabase()
 
 # CORS for setting it up alongside the Flutter UI
@@ -29,7 +31,7 @@ app.add_middleware(
 
 @app.get("/", include_in_schema=False)
 async def root():
-    return RedirectResponse("/docs", status_code=301)
+    return RedirectResponse("/db/docs", status_code=301)
 
 @app.get("/test")
 def test_method():
