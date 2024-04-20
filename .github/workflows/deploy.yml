@@ -21,4 +21,4 @@ jobs:
 
       - name: Run command on EC2
         run: |
-          ssh ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_URL }} "echo 'Hello from GitHub Actions' >> hello.txt"
+          ssh ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_URL }} "ls >> hello.txt"
