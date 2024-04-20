@@ -9,7 +9,7 @@ import 'package:logger/logger.dart';
 void main() {
   // var apiUrl = 'http://127.0.0.1:8000';
   // var logLevel = Level.debug;
-  var apiUrl = 'http://138.197.63.156:8000';
+  var apiUrl = 'https://mybnuuy.com:80';
   var logLevel = Level.info;
   Logger.level = logLevel;
   runApp(AppConfig(

@@ -8343,7 +8343,7 @@ m.aw()
 m.saO(l)
 s.cx$!==$&&A.a2()
 s.cx$=m
-n=m}s.TI(new A.JZ(p,new A.ty("http://138.197.63.156:8000",B.GI,l),o,n,l))
+n=m}s.TI(new A.JZ(p,new A.ty("https://mybnuuy.com:80",B.GI,l),o,n,l))
 s.GO()},
 GF:function GF(a){this.a=a},
 a0A:function a0A(){},
