@@ -32,7 +32,7 @@ jobs:
           EC2_SSH_PRIVATE_KEY: ${{ secrets.AWS_PEM }}
           EC2_URL: ${{ secrets.EC2_URL }}
 
-      - name: Run command on EC2
+      - name: Copy Build to EC2
         run: |
-          scp -r ./AllergenCheckerApp/build/web/ ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_URL }}:/var/www/html/
+          scp -r ./AllergenCheckerApp/build/web root@${{ secrets.EC2_URL }}:/var/www/html
           ssh ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_URL }} "ls >> hello.txt"

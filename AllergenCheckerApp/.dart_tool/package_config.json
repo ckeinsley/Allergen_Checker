@@ -33,9 +33,9 @@
     },
     {
       "name": "cupertino_icons",
-      "rootUri": "file:///C:/Users/ChristopherK/AppData/Local/Pub/Cache/hosted/pub.dev/cupertino_icons-1.0.6",
+      "rootUri": "file:///C:/Users/ChristopherK/AppData/Local/Pub/Cache/hosted/pub.dev/cupertino_icons-1.0.8",
       "packageUri": "lib/",
-      "languageVersion": "2.19"
+      "languageVersion": "3.1"
     },
     {
       "name": "english_words",
@@ -218,7 +218,7 @@
       "languageVersion": "3.3"
     }
   ],
-  "generated": "2024-04-20T15:00:35.903821Z",
+  "generated": "2024-04-20T16:05:48.516301Z",
   "generator": "pub",
   "generatorVersion": "3.3.4"
 }
