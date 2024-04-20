@@ -21,4 +21,4 @@ jobs:
 
       - name: Run command on EC2
         run: |
-          ssh -o StrictHostKeyChecking=no $EC2_USERNAME@$EC2_URL "echo 'Hello from GitHub Actions' >> hello.txt"
+          ssh $EC2_USERNAME@$EC2_URL "echo 'Hello from GitHub Actions' >> hello.txt"
