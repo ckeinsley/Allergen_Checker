@@ -34,5 +34,5 @@ jobs:
 
       - name: Run command on EC2
         run: |
-          ls
+          scp -r ./AllergenCheckerApp/build/web/ $EC2_USERNAME@$EC2_URL:/var/www/html/
           ssh ${{ secrets.EC2_USERNAME }}@${{ secrets.EC2_URL }} "ls >> hello.txt"
