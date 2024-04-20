@@ -38,7 +38,7 @@ def test_method():
     '''
     This method is for me to test particular things easily without touching other stuff
     '''
-    return db.check_common_exists('What is up')
+    return "Yeah it's working"
 
 # Processing Requests
 class IngredientsRequest(BaseModel):
