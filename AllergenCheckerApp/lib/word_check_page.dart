@@ -75,7 +75,7 @@ class _WordCheckPageState extends State<WordCheckPage> {
                   },
                   maxLines: null,
                   decoration: const InputDecoration(
-                      hintText: 'Enter one ingredient per line',
+                      hintText: 'Enter comma separated list of ingredients',
                       labelText: 'Ingredients to Check',
                       border: OutlineInputBorder()),
                 ),
@@ -91,8 +91,8 @@ class _WordCheckPageState extends State<WordCheckPage> {
                 onPressed: () {
                   logger.d(_userInput);
                   List<String> inputList = _userInput
-                      .split('\n')
-                      .where((line) => line.trim().isNotEmpty)
+                      .split(',')
+                      .where((word) => word.trim().isNotEmpty)
                       .map((e) => e.trim())
                       .toList();
                   callApi(inputList);
