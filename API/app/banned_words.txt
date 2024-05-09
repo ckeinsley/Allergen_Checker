@@ -6,3 +6,6 @@ diet
 less
 and/or
 and
+all
+USA
+per
