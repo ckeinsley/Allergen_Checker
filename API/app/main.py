@@ -109,7 +109,6 @@ def clean_word(word):
 def check_words(words: List[str]):
     with open('app/banned_words.txt', 'r') as file:
         banned_words = file.read().splitlines()
-    banned_words = ["yes", "the", "one", "fat", "diet", "less"]
     measurement_pattern = re.compile(r'\d+(g|%|cm|mm|m|km|mg|lb|oz)')
 
     filtered_words = [
