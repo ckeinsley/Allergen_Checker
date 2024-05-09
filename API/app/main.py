@@ -1,4 +1,5 @@
 import base64
+import re
 from typing import List
 
 from app.data.database import Database
@@ -8,7 +9,7 @@ from app.data.sqlite_database import SqlLiteDatabase
 from app.ocr.aws_ocr import AwsOCR
 from app.ocr.models.processed_image import ProcessedImage
 from app.ocr.ocr import OCR
-from fastapi import FastAPI, File, Response, UploadFile
+from fastapi import FastAPI, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, RedirectResponse
 from pydantic import BaseModel, Field
@@ -34,7 +35,7 @@ app.add_middleware(
 
 @app.get("/", include_in_schema=False)
 async def root():
-    return RedirectResponse("/docs", status_code=301)
+    return RedirectResponse("/db/docs", status_code=301)
 
 
 @app.get("/test")
@@ -85,7 +86,7 @@ def check_ingredients(ingredients_request: IngredientsRequest):
     Given a list of ingredients to check, returns a list of matched allergens
     '''
     print("Received request body:", ingredients_request)
-    checked = db.check_words(ingredients_request.ingredients)
+    checked = check_words(ingredients_request.ingredients)
     response = ProcessedIngredientsResponse(
         checked=checked, count=len(checked))
     return response
@@ -95,12 +96,27 @@ def check_ingredients(ingredients_request: IngredientsRequest):
 async def upload_image(file: UploadFile = File(...)):
     image_bytes = await file.read()
     processedImage: ProcessedImage = ocr.check_image(image_bytes=image_bytes)
-    checked = db.check_words(processedImage.found_words)
+    checked = check_words(processedImage.found_words)
     return ImageIngredientsResponse(
         image=base64.b64encode(processedImage.image_bytes).decode('utf-8'),
         checked=checked,
         count=len(checked)
     )
+    
+def check_words(words: List[str]):
+    with open('app/banned_words.txt', 'r') as file:
+        banned_words = file.read().splitlines()
+    banned_words = ["yes", "the", "one", "fat", "diet", "less"]
+    measurement_pattern = re.compile(r'\d+(g|%|cm|mm|m|km|mg|lb|oz)')
+
+    filtered_words = [
+        word.strip('(),') for word in words 
+        if len(word) > 2 and 
+        any(char.isalpha() for char in word) and 
+        word not in banned_words and 
+        not measurement_pattern.search(word)
+    ]
+    return db.check_words(filtered_words)
 
 # Direct Database Integrations
 

@@ -3,7 +3,7 @@ from io import BytesIO
 import boto3
 from app.ocr.models.processed_image import ProcessedImage
 from app.ocr.ocr import OCR
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFont, ImageOps
 
 
 class AwsOCR(OCR):
@@ -11,6 +11,7 @@ class AwsOCR(OCR):
         '''Checks image for words'''
 
         image = Image.open(BytesIO(image_bytes))
+        image = ImageOps.exif_transpose(image)
         draw = ImageDraw.Draw(image)
         client = boto3.client('textract', region_name='us-east-1')
         response = client.analyze_document(
