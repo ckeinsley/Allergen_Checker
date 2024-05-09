@@ -7,6 +7,9 @@ name = "pypi"
 fastapi = "*"
 uvicorn = {extras = ["standard"], version = "*"}
 sqlalchemy = "*"
+python-multipart = "*"
+boto3 = "*"
+pillow = "*"
 
 [dev-packages]
 

@@ -20,3 +20,5 @@ echo "Starting new Uvicorn process..."
 pipenv run uvicorn "$APP_NAME:app" --host "$HOST" --port "$PORT" > stdout.log 2> stderr.log &
 
 echo "Uvicorn started successfully!"
+
+#uvicorn app.main:app --port 8080 --reload

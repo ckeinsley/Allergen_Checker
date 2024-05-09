@@ -1,4 +1,5 @@
 import 'package:allergen_checker/allergens_page.dart';
+import 'package:allergen_checker/image_upload_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'app_state.dart';
@@ -7,10 +8,10 @@ import 'config.dart';
 import 'package:logger/logger.dart';
 
 void main() {
-  // var apiUrl = 'localhost:8000/db';
-  // var logLevel = Level.debug;
-  var apiUrl = 'https://bnuuyschecker.com/db';
-  var logLevel = Level.info;
+  var apiUrl = 'http://localhost:8080/db';
+  var logLevel = Level.debug;
+  // var apiUrl = 'https://bnuuyschecker.com/db';
+  // var logLevel = Level.info;
   Logger.level = logLevel;
   runApp(AppConfig(
     apiUrl: apiUrl,
@@ -55,6 +56,9 @@ class _MyHomePageState extends State<MyHomePage> {
         page = const WordCheckPage();
         break;
       case 1:
+        page = const ImageUploadPage();
+        break;
+      case 2:
         page = const AllergensPage();
         break;
       default:
@@ -73,6 +77,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     NavigationRailDestination(
                       icon: Icon(Icons.home),
                       label: Text('Home'),
+                    ),
+                    NavigationRailDestination(
+                      icon: Icon(Icons.photo),
+                      label: Text('Allergens'),
                     ),
                     NavigationRailDestination(
                       icon: Icon(Icons.science_rounded),

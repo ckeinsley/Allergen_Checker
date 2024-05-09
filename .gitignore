@@ -2,3 +2,5 @@ Flutter*Installation/
 allergen_checker.code-workspace
 secrets*
 Metadata/
+.vscode/
+__pycache__/
