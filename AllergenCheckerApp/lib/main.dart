@@ -8,10 +8,10 @@ import 'config.dart';
 import 'package:logger/logger.dart';
 
 void main() {
-  var apiUrl = 'http://localhost:8080/db';
-  var logLevel = Level.debug;
-  // var apiUrl = 'https://bnuuyschecker.com/db';
-  // var logLevel = Level.info;
+  // var apiUrl = 'http://localhost:8080/db';
+  // var logLevel = Level.debug;
+  var apiUrl = 'https://bnuuyschecker.com/db';
+  var logLevel = Level.info;
   Logger.level = logLevel;
   runApp(AppConfig(
     apiUrl: apiUrl,
