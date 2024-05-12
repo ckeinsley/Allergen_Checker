@@ -60,7 +60,7 @@ class AwsOCR(OCR):
         # Return the byte string of the new image
         return ProcessedImage(
             image_bytes=return_image_bytes,
-            found_words=re.split((r'[:,]', joined_words))
+            found_words=re.split(r'[:,]', joined_words)
         )
 
     # Function to find the largest font size that fits the bounding box
