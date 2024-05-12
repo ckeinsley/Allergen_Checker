@@ -104,7 +104,7 @@ async def upload_image(file: UploadFile = File(...)):
     )
     
 def clean_word(word):
-    return re.sub(r'^\W+|\W+$', '', word)
+    return word.replace(' ','')
     
 def check_words(words: List[str]):
     with open('app/banned_words.txt', 'r') as file:
@@ -112,7 +112,7 @@ def check_words(words: List[str]):
     measurement_pattern = re.compile(r'\d+(g|%|cm|mm|m|km|mg|lb|oz)')
 
     filtered_words = [
-        clean_word(word) for word in words 
+        word.strip() for word in words 
         if len(word) > 2 and 
         any(char.isalpha() for char in word) and 
         word not in banned_words and 

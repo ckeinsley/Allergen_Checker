@@ -80,7 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     NavigationRailDestination(
                       icon: Icon(Icons.photo),
-                      label: Text('Allergens'),
+                      label: Text('Upload Image'),
                     ),
                     NavigationRailDestination(
                       icon: Icon(Icons.science_rounded),

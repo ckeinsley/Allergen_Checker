@@ -50,16 +50,18 @@ class AwsOCR(OCR):
 
         output_image_bytes = BytesIO()
         image.save(output_image_bytes, format='PNG')
-        # image.show()
+        image.show()
 
         # Retrieve the byte string from the BytesIO object
         output_image_bytes.seek(0)
         return_image_bytes = output_image_bytes.getvalue()
 
+        joined_words = ' '.join(words)
+        print(joined_words)
         # Return the byte string of the new image
         return ProcessedImage(
             image_bytes=return_image_bytes,
-            found_words=words
+            found_words=joined_words.split(',')
         )
 
     # Function to find the largest font size that fits the bounding box

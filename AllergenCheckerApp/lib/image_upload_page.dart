@@ -22,6 +22,7 @@ class _ImageUploadPage extends State<ImageUploadPage> {
   List<CheckedWord> checkedWords = [];
   Uint8List? _image;
   bool _isInAsyncCall = false;
+  bool _canUploadImage = false;
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +34,7 @@ class _ImageUploadPage extends State<ImageUploadPage> {
       if (pickedFile != null) {
         pickedFile.readAsBytes().then((value) => setState(() {
               _image = value;
+              _canUploadImage = true;
             }));
       }
     }
@@ -68,6 +70,7 @@ class _ImageUploadPage extends State<ImageUploadPage> {
             _image = base64.decode(responseData['image']);
             checkedWords = words;
             _isInAsyncCall = false;
+            _canUploadImage = false;
           });
         } else {
           // Handle error response
@@ -129,7 +132,7 @@ class _ImageUploadPage extends State<ImageUploadPage> {
                         onPressed: pickImage,
                         child: const Text('Select Image')),
                     ElevatedButton(
-                        onPressed: uploadImage,
+                        onPressed: _canUploadImage ? uploadImage : (){},
                         child: const Text('Upload Image')),
                   ],
                 ),
