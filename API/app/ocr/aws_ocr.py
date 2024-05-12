@@ -4,6 +4,7 @@ import boto3
 from app.ocr.models.processed_image import ProcessedImage
 from app.ocr.ocr import OCR
 from PIL import Image, ImageDraw, ImageFont, ImageOps
+import re
 
 
 class AwsOCR(OCR):
@@ -50,18 +51,16 @@ class AwsOCR(OCR):
 
         output_image_bytes = BytesIO()
         image.save(output_image_bytes, format='PNG')
-        image.show()
 
         # Retrieve the byte string from the BytesIO object
         output_image_bytes.seek(0)
         return_image_bytes = output_image_bytes.getvalue()
 
         joined_words = ' '.join(words)
-        print(joined_words)
         # Return the byte string of the new image
         return ProcessedImage(
             image_bytes=return_image_bytes,
-            found_words=joined_words.split(',')
+            found_words=re.split((r'[:,]', joined_words))
         )
 
     # Function to find the largest font size that fits the bounding box
