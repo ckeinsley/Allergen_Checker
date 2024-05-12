@@ -109,18 +109,24 @@ class _HistoryPageState extends State<HistoryPage> {
 
 class SelectedHistoryPage extends StatelessWidget {
   final CheckedImage checkedImage;
+  final logger = Logger();
 
-  const SelectedHistoryPage(this.checkedImage, {super.key});
+  SelectedHistoryPage(this.checkedImage, {super.key});
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
         appBar: AppBar(
           title: Text(checkedImage.title),
         ),
         body: Center(
-            child: ImageResult(
-                checkedWords: checkedImage.checkedWords,
-                image: checkedImage.image)));
+            child: Column(
+              children: [
+                ImageResult(
+                    checkedWords: checkedImage.checkedWords,
+                    image: checkedImage.image),
+              ],
+            )));
   }
 }
