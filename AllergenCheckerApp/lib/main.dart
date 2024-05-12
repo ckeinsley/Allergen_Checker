@@ -1,4 +1,5 @@
 import 'package:allergen_checker/allergens_page.dart';
+import 'package:allergen_checker/history_page.dart';
 import 'package:allergen_checker/image_upload_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -8,10 +9,10 @@ import 'config.dart';
 import 'package:logger/logger.dart';
 
 void main() {
-  // var apiUrl = 'http://localhost:8080/db';
-  // var logLevel = Level.debug;
-  var apiUrl = 'https://bnuuyschecker.com/db';
-  var logLevel = Level.info;
+  var apiUrl = 'http://localhost:8080/db';
+  var logLevel = Level.debug;
+  // var apiUrl = 'https://bnuuyschecker.com/db';
+  // var logLevel = Level.info;
   Logger.level = logLevel;
   runApp(AppConfig(
     apiUrl: apiUrl,
@@ -61,6 +62,9 @@ class _MyHomePageState extends State<MyHomePage> {
       case 2:
         page = const AllergensPage();
         break;
+      case 3:
+        page = const HistoryPage();
+        break;
       default:
         throw UnimplementedError('no widget for $selectedIndex');
     }
@@ -85,6 +89,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     NavigationRailDestination(
                       icon: Icon(Icons.science_rounded),
                       label: Text('Allergens'),
+                    ),
+                    NavigationRailDestination(
+                      icon: Icon(Icons.history),
+                      label: Text('Image History'),
                     ),
                   ],
                   selectedIndex: selectedIndex,

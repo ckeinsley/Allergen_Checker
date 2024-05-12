@@ -1,14 +1,18 @@
 import 'dart:typed_data';
 
-import 'package:allergen_checker/checked_word_card.dart';
+import 'package:allergen_checker/app_state.dart';
+import 'package:allergen_checker/models/checked_image.dart';
+import 'package:allergen_checker/widgets/checked_word_card.dart';
 import 'package:allergen_checker/models/checked_word.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:provider/provider.dart';
 import 'dart:convert';
 import 'config.dart';
+import 'widgets/image_result.dart';
 
 class ImageUploadPage extends StatefulWidget {
   const ImageUploadPage({super.key});
@@ -21,11 +25,13 @@ class _ImageUploadPage extends State<ImageUploadPage> {
   final logger = Logger();
   List<CheckedWord> checkedWords = [];
   Uint8List? _image;
+  String? _fileName;
   bool _isInAsyncCall = false;
   bool _canUploadImage = false;
 
   @override
   Widget build(BuildContext context) {
+    var history = context.watch<MyAppState>().history;
     final apiUrl = AppConfig.of(context).apiUrl;
 
     Future<void> pickImage() async {
@@ -35,6 +41,7 @@ class _ImageUploadPage extends State<ImageUploadPage> {
         pickedFile.readAsBytes().then((value) => setState(() {
               _image = value;
               _canUploadImage = true;
+              _fileName = pickedFile.name;
             }));
       }
     }
@@ -71,6 +78,7 @@ class _ImageUploadPage extends State<ImageUploadPage> {
             checkedWords = words;
             _isInAsyncCall = false;
             _canUploadImage = false;
+            history.add(CheckedImage(title: _fileName!, image: _image!, checkedWords: checkedWords));
           });
         } else {
           // Handle error response
@@ -94,35 +102,7 @@ class _ImageUploadPage extends State<ImageUploadPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      _image != null
-                          ? Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Image.memory(
-                                _image!,
-                                fit: BoxFit.contain,
-                              ),
-                            )
-                          : Container(
-                              height: 200,
-                            ),
-                      ListView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: checkedWords.length,
-                        itemBuilder: (context, index) {
-                          return CheckedWordCard(
-                            checkedWord: checkedWords[index],
-                          );
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+              ImageResult(image: _image, checkedWords: checkedWords),
               SizedBox(
                 height: 100.0,
                 child: Row(

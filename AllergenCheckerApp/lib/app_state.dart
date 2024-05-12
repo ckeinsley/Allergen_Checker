@@ -1,4 +1,5 @@
 import 'package:allergen_checker/models/allergen.dart';
+import 'package:allergen_checker/models/checked_image.dart';
 import 'package:flutter/material.dart';
 
 class MyAppState extends ChangeNotifier {
@@ -6,6 +7,7 @@ class MyAppState extends ChangeNotifier {
   var page = 0;
   var totalCount = 0;
   var favorites = <Allergen>[];
+  var history = <CheckedImage>[];
 
   void updateAllergens(List<Allergen> allergens, int page, int totalCount) {
     page = page;
@@ -22,4 +24,16 @@ class MyAppState extends ChangeNotifier {
     }
     notifyListeners();
   }
+
+  void addImageToHistory(CheckedImage image) {
+    history.add(image);
+    print("ADDED IMAGE TO HISTORY");
+    notifyListeners();
+  }
+
+  void removeImageFromHistory(CheckedImage image) {
+    history.remove(image);
+    notifyListeners();
+  }
+
 }

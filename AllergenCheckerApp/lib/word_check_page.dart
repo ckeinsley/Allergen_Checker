@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:logger/logger.dart';
 import 'dart:convert';
-import 'checked_word_card.dart';
+import 'widgets/checked_word_card.dart';
 import 'config.dart';
 
 class WordCheckPage extends StatefulWidget {
