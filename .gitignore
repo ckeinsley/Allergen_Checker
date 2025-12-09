@@ -4,3 +4,5 @@ secrets*
 Metadata/
 .vscode/
 __pycache__/
+.env
+.venv

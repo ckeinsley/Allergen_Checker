@@ -2,7 +2,6 @@ import 'dart:typed_data';
 
 import 'package:allergen_checker/app_state.dart';
 import 'package:allergen_checker/models/checked_image.dart';
-import 'package:allergen_checker/widgets/checked_word_card.dart';
 import 'package:allergen_checker/models/checked_word.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
